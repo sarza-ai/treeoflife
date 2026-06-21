@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Tree of Liberty — A Manifesto in One Transaction</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap);
+    @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap);
+    @import url(https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap);
+
+    :root {
+      --bg: #000000;
+      --primary: #FFFFFF;
+      --accent: #B22222;
+      --accent-bright: #DC2626;
+      --muted: rgba(255, 255, 255, 0.55);
+      --dim: rgba(255, 255, 255, 0.30);
+      --line: rgba(255, 255, 255, 0.10);
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-accent: rgba(178, 34, 34, 0.10);
+      --font-heading: "Inter", sans-serif;
+      --font-body: "Inter", sans-serif;
+      --font-mono: "Roboto Mono", monospace;
+      --font-num: "JetBrains Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: #050505;
+      color: var(--primary);
+      margin: 0;
+      padding: 0;
+    }
+
+    .deck-shell {
+      padding: 48px 16px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .deck-header {
+      width: 1280px;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+      font-family: var(--font-num);
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+    }
+    .deck-header .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 9999px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
+
+    .slide-frame {
+      width: 1280px;
+      height: 720px;
+      max-width: 100%;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-label {
+      width: 1280px;
+      max-width: 100%;
+      padding: 0 8px;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-num);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .ppt-slide {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--primary);
+      box-sizing: border-box;
+    }
+    .accent-line { height: 2px; background: var(--accent); }
+    .accent-bar { width: 4px; background: var(--accent); }
+    .donate-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 40px;
+      background: var(--accent);
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      border: 2px solid var(--accent);
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+    }
+    .donate-btn:hover {
+      background: var(--accent-bright);
+      border-color: var(--accent-bright);
+      transform: translateY(-1px);
+    }
+
+    /* Slide 01 — Cover */
+    .s1 .cover-title {
+      font-family: var(--font-heading);
+      font-size: 84px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      line-height: 1.0;
+      margin: 0;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.85);
+    }
+    .s1 .cover-rule { width: 120px; height: 2px; background: var(--accent); }
+    .s1 .cover-subtitle {
+      font-family: var(--font-num);
+      font-size: 18px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+    }
+    .s1 .chip {
+      font-family: var(--font-num);
+      font-size: 14px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .s1 .chip-dot {
+      width: 6px; height: 6px; border-radius: 9999px;
+      background: var(--accent); display: inline-block;
+    }
+    .s1 .bg-image {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      filter: brightness(1.35) contrast(1.12) saturate(1.15);
+      z-index: 0;
+    }
+    .s1 .bg-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.48) 50%, rgba(0,0,0,0.62) 100%);
+    }
+    .s1 .corner-mark {
+      font-family: var(--font-num);
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+    }
+
+    /* Slide 02 — Manifesto */
+    .s2 .header-bar {
+      height: 85px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .s2 .header-left { display: flex; align-items: center; gap: 22px; height: 100%; }
+    .s2 .header-bar .accent-bar { height: 56px; }
+    .s2 .header-title {
+      font-family: var(--font-heading);
+      font-size: 40px; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--primary); line-height: 1;
+    }
+    .s2 .header-right {
+      font-family: var(--font-num);
+      font-size: 14px; letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: uppercase;
+    }
+    .s2 .body-region { height: 635px; display: flex; }
+    .s2 .col-left {
+      width: 60%; padding: 0 70px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .s2 .col-right {
+      width: 40%; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 60px;
+    }
+    .s2 .quote-rule { width: 100px; height: 2px; background: var(--accent); margin-bottom: 36px; }
+    .s2 .quote-text {
+      font-family: var(--font-body);
+      font-size: 38px; font-weight: 500; line-height: 1.3;
+      color: var(--primary); margin: 0;
+    }
+    .s2 .quote-attribution {
+      font-family: var(--font-num);
+      font-size: 14px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 60px; line-height: 1.6;
+    }
+    .s2 .square-stack {
+      position: relative; width: 280px; height: 280px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .s2 .sq {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .s2 .sq-1 { width: 280px; height: 280px; border: 2px solid rgba(255,255,255,0.10); }
+    .s2 .sq-2 { width: 200px; height: 200px; border: 2px solid rgba(255,255,255,0.20); }
+    .s2 .sq-3 { width: 120px; height: 120px; border: 2px solid rgba(255,255,255,0.30); }
+    .s2 .sq-4 { width: 60px;  height: 60px;  border: 2px solid rgba(255,255,255,0.40); }
+    .s2 .sq-5 { width: 24px;  height: 24px;  background: var(--accent); }
+    .s2 .right-caption {
+      position: absolute; bottom: 40px; left: 0; right: 0;
+      text-align: center;
+      font-family: var(--font-num);
+      font-size: 13px; letter-spacing: 0.3em;
+      color: rgba(255, 255, 255, 0.40);
+      text-transform: uppercase;
+    }
+    .s2 .right-toplabel {
+      position: absolute; top: 32px; left: 0; right: 0;
+      text-align: center;
+      font-family: var(--font-num);
+      font-size: 12px; letter-spacing: 0.35em;
+      color: rgba(255, 255, 255, 0.30);
+      text-transform: uppercase;
+    }
+
+    /* Slide 03 — Donate */
+    .s4 .ppt-slide { display: flex; flex-direction: column; }
+
+    .deck-footer {
+      width: 1280px;
+      max-width: 100%;
+      padding: 24px 8px 0;
+      border-top: 1px solid var(--line);
+      font-family: var(--font-num);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      text-align: center;
+    }
+
+    @media (max-width: 1320px) {
+      .deck-header, .slide-frame, .slide-label, .deck-footer {
+        width: 100%;
+      }
+      .slide-frame {
+        height: auto;
+        aspect-ratio: 1280 / 720;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-shell">
+
+    <div class="deck-header">
+      <span>THE TREE OF LIBERTY</span>
+      <span>MANIFESTO <span class="dot"></span> BITCOIN ONLY <span class="dot"></span> NO KYC</span>
+      <span>03 SLIDES</span>
+    </div>
+
+    <!-- SLIDE 01 — COVER -->
+    <div class="slide-label">
+      <span>01 — COVER</span>
+      <span>THE TREE OF LIBERTY</span>
+    </div>
+    <div class="slide-frame">
+      <div class="ppt-slide s1">
+        <img class="bg-image" src="hagacore.jpg" alt="Hagacore background">
+        <div class="bg-overlay"></div>
+
+        <div class="absolute top-10 left-[60px] flex items-center gap-3" style="z-index:10;">
+          <span class="inline-block" style="width:28px;height:2px;background:var(--accent);"></span>
+          <span class="corner-mark">MANIFESTO · 01</span>
+        </div>
+        <div class="absolute top-10 right-[60px] corner-mark" style="z-index:10;">BLOOD-RED ON BLACK</div>
+
+        <div class="absolute inset-0 flex flex-col items-center justify-center" style="z-index:10;">
+          <div class="cover-rule"></div>
+          <h1 class="cover-title" style="margin-top:28px;">THE TREE</h1>
+          <h1 class="cover-title" style="margin-top:12px;">OF LIBERTY</h1>
+          <div class="cover-rule" style="margin-top:28px;"></div>
+          <p class="cover-subtitle" style="margin-top:22px;">A MANIFESTO IN ONE TRANSACTION</p>
+        </div>
+
+        <div class="absolute left-0 right-0 flex items-center justify-center gap-6" style="bottom:48px; z-index:10;">
+          <span class="chip">BITCOIN ONLY</span>
+          <span class="chip-dot"></span>
+          <span class="chip">NO KYC</span>
+          <span class="chip-dot"></span>
+          <span class="chip">NO MASTER</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02 — MANIFESTO -->
+    <div class="slide-label">
+      <span>02 — MANIFESTO</span>
+      <span>THOMAS JEFFERSON · 1787</span>
+    </div>
+    <div class="slide-frame">
+      <div class="ppt-slide s2">
+        <div class="header-bar">
+          <div class="header-left">
+            <div class="accent-bar"></div>
+            <div class="header-title">MANIFESTO</div>
+          </div>
+          <div class="header-right">THOMAS JEFFERSON · 1787</div>
+        </div>
+
+        <div class="body-region">
+          <div class="col-left">
+            <div class="quote-rule"></div>
+            <blockquote class="quote-text">
+              &ldquo;The tree of liberty must be refreshed from time to time with the <span style="color:var(--accent);font-weight:700">blood of patriots &amp; tyrants</span>. It is its natural manure.&rdquo;
+            </blockquote>
+            <div class="quote-attribution">&mdash; THOMAS JEFFERSON, LETTER TO WILLIAM STEPHENS SMITH, NOV 13, 1787</div>
+          </div>
+
+          <div class="col-right">
+            <div class="right-toplabel">FIG. 01 · CONCENTRIC ORDER</div>
+            <div class="square-stack">
+              <div class="sq sq-1"></div>
+              <div class="sq sq-2"></div>
+              <div class="sq sq-3"></div>
+              <div class="sq sq-4"></div>
+              <div class="sq sq-5"></div>
+            </div>
+            <div class="right-caption">PARS QUOD BELLUM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 03 — DONATE -->
+    <div class="slide-label">
+      <span>03 — DONATE</span>
+      <span>BITCOIN MAINNET · ON-CHAIN PROOF</span>
+    </div>
+    <div class="slide-frame">
+      <div class="ppt-slide s4">
+
+        <header style="height:85px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; padding:0 70px; flex-shrink:0;">
+          <div style="display:flex; align-items:center; gap:18px;">
+            <div style="width:4px; height:42px; background:var(--accent);"></div>
+            <span style="font-family:var(--font-heading); font-size:40px; font-weight:700; letter-spacing:0.12em; color:#FFFFFF;">DONATE</span>
+          </div>
+          <span style="font-family:var(--font-num); font-size:14px; letter-spacing:0.18em; color:rgba(255,255,255,0.50);">BITCOIN MAINNET · ON-CHAIN PROOF</span>
+        </header>
+
+        <div style="height:635px; display:flex; position:relative;">
+
+          <div style="width:34%; padding:40px 24px 40px 70px; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;">
+            <div class="accent-line" style="width:80px;"></div>
+            <h1 style="font-family:var(--font-heading); font-size:42px; font-weight:700; color:#FFFFFF; line-height:1.05; letter-spacing:0.05em; margin:18px 0 0 0;">REFRESH THE TREE.</h1>
+            <div style="font-family:var(--font-num); font-size:13px; font-weight:500; letter-spacing:0.25em; text-transform:uppercase; color:var(--accent); margin-top:14px;">ONE TRANSACTION · ONE CAUSE</div>
+
+            <div style="margin-top:30px;">
+              <div style="font-family:var(--font-num); font-size:11px; letter-spacing:0.18em; color:rgba(255,255,255,0.50);">BTC ADDRESS (P2PKH)</div>
+              <div style="font-family:var(--font-num); font-size:16px; font-weight:500; letter-spacing:0.04em; color:#FFFFFF; word-break:break-all; margin-top:6px; line-height:1.45;">3GEyeURhLVbRWtZL6qN8MoBKseedN6vRjb</div>
+            </div>
+
+            <div style="margin-top:26px;">
+              <a class="donate-btn" href="bitcoin:3GEyeURhLVbRWtZL6qN8MoBKseedN6vRjb" target="_blank" rel="noopener" style="padding:14px 28px; font-size:17px;">
+                <span class="material-icons" style="font-size:22px;">currency_bitcoin</span>
+                DONATE NOW
+              </a>
+            </div>
+          </div>
+
+          <div style="width:30%; padding:40px 24px; display:flex; flex-direction:column; justify-content:center; align-items:center; box-sizing:border-box; border-left:1px solid var(--line); border-right:1px solid var(--line);">
+            <div style="background:rgba(255,255,255,0.04); padding:18px; border:1px solid var(--line); display:flex; flex-direction:column; align-items:center;">
+              <img src="btc_qr.png" alt="BTC wallet QR — 3GEyeURhLVbRWtZL6qN8MoBKseedN6vRjb" style="width:220px; height:220px; display:block; background:#FFFFFF;">
+              <div style="font-family:var(--font-num); font-size:13px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.75); margin-top:14px;">SCAN TO DONATE</div>
+              <div style="font-family:var(--font-num); font-size:11px; letter-spacing:0.1em; color:rgba(255,255,255,0.40); margin-top:6px;">ANY WALLET · ANY AMOUNT</div>
+            </div>
+          </div>
+
+          <div style="width:36%; padding:32px 70px 32px 24px; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;">
+            <div style="border:1px solid var(--line); padding:6px; background:rgba(255,255,255,0.02); width:100%; box-sizing:border-box;">
+              <img src="wallet_screenshot.jpg" alt="Wallet screenshot — Crypto.com Explorer, 2026-06-21" style="width:100%; max-height:380px; object-fit:contain; display:block;">
+            </div>
+            <div style="font-family:var(--font-num); font-size:10px; letter-spacing:0.12em; color:rgba(255,255,255,0.45); margin-top:8px;">WALLET SCREENSHOT · CRYPTO.COM EXPLORER · 2026-06-21</div>
+
+            <div style="display:flex; align-items:center; gap:10px; margin-top:18px;">
+              <span class="material-icons" style="color:var(--accent); font-size:20px;">verified</span>
+              <span style="font-family:var(--font-num); font-size:13px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:#FFFFFF;">VERIFY ON-CHAIN</span>
+            </div>
+            <p style="font-family:var(--font-body); font-size:13px; line-height:1.55; color:rgba(255,255,255,0.60); margin:10px 0 0 0;">Cross-check on mempool.space, blockchain.com, or your own node. No middleman, no custodian, no off-ledger.</p>
+          </div>
+
+          <div style="position:absolute; bottom:18px; right:70px; font-family:var(--font-num); font-size:12px; letter-spacing:0.12em; color:rgba(255,255,255,0.35);">THE TREE OF LIBERTY · 03 / 03</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck-footer">
+      THE TREE OF LIBERTY &nbsp;·&nbsp; A MANIFESTO IN ONE TRANSACTION &nbsp;·&nbsp; BTC: 3GEyeURhLVbRWtZL6qN8MoBKseedN6vRjb
+    </div>
+
+  </div>
+</body>
+</html>
