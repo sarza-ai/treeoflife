@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* ===== Global CSS (inlined from global.css) ===== */
     @import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap);
     @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap);
     @import url(https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap);
@@ -37,6 +38,7 @@
       padding: 0;
     }
 
+    /* Page chrome — the scrollable canvas behind the slides */
     .deck-shell {
       padding: 48px 16px 80px;
       display: flex;
@@ -67,6 +69,7 @@
       vertical-align: middle;
     }
 
+    /* Each slide frame */
     .slide-frame {
       width: 1280px;
       height: 720px;
@@ -89,6 +92,7 @@
       color: rgba(255, 255, 255, 0.35);
     }
 
+    /* Slide canvas primitive (from global.css) */
     .ppt-slide {
       width: 1280px;
       height: 720px;
@@ -100,6 +104,10 @@
     }
     .accent-line { height: 2px; background: var(--accent); }
     .accent-bar { width: 4px; background: var(--accent); }
+    .surface-card {
+      background: var(--surface);
+      border-left: 3px solid rgba(178, 34, 34, 0.45);
+    }
     .donate-btn {
       display: inline-flex;
       align-items: center;
@@ -121,7 +129,7 @@
       transform: translateY(-1px);
     }
 
-    /* Slide 01 — Cover */
+    /* ===== Slide 01 — Cover ===== */
     .s1 .cover-title {
       font-family: var(--font-heading);
       font-size: 84px;
@@ -170,7 +178,7 @@
       text-transform: uppercase;
     }
 
-    /* Slide 02 — Manifesto */
+    /* ===== Slide 02 — Manifesto ===== */
     .s2 .header-bar {
       height: 85px;
       display: flex; align-items: center; justify-content: space-between;
@@ -244,9 +252,10 @@
       text-transform: uppercase;
     }
 
-    /* Slide 03 — Donate */
+    /* ===== Slide 04 — Donate + Wallet Proof (combined) ===== */
     .s4 .ppt-slide { display: flex; flex-direction: column; }
 
+    /* Footer */
     .deck-footer {
       width: 1280px;
       max-width: 100%;
@@ -260,6 +269,7 @@
       text-align: center;
     }
 
+    /* Responsive: on small screens, let slides scale down */
     @media (max-width: 1320px) {
       .deck-header, .slide-frame, .slide-label, .deck-footer {
         width: 100%;
@@ -274,13 +284,14 @@
 <body>
   <div class="deck-shell">
 
+    <!-- Top deck header -->
     <div class="deck-header">
       <span>THE TREE OF LIBERTY</span>
       <span>MANIFESTO <span class="dot"></span> BITCOIN ONLY <span class="dot"></span> NO KYC</span>
       <span>03 SLIDES</span>
     </div>
 
-    <!-- SLIDE 01 — COVER -->
+    <!-- ============== SLIDE 01 — COVER ============== -->
     <div class="slide-label">
       <span>01 — COVER</span>
       <span>THE TREE OF LIBERTY</span>
@@ -314,7 +325,7 @@
       </div>
     </div>
 
-    <!-- SLIDE 02 — MANIFESTO -->
+    <!-- ============== SLIDE 02 — MANIFESTO ============== -->
     <div class="slide-label">
       <span>02 — MANIFESTO</span>
       <span>THOMAS JEFFERSON · 1787</span>
@@ -353,7 +364,7 @@
       </div>
     </div>
 
-    <!-- SLIDE 03 — DONATE -->
+    <!-- ============== SLIDE 03 — DONATE + WALLET PROOF ============== -->
     <div class="slide-label">
       <span>03 — DONATE</span>
       <span>BITCOIN MAINNET · ON-CHAIN PROOF</span>
@@ -361,6 +372,7 @@
     <div class="slide-frame">
       <div class="ppt-slide s4">
 
+        <!-- Header bar -->
         <header style="height:85px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; padding:0 70px; flex-shrink:0;">
           <div style="display:flex; align-items:center; gap:18px;">
             <div style="width:4px; height:42px; background:var(--accent);"></div>
@@ -369,8 +381,10 @@
           <span style="font-family:var(--font-num); font-size:14px; letter-spacing:0.18em; color:rgba(255,255,255,0.50);">BITCOIN MAINNET · ON-CHAIN PROOF</span>
         </header>
 
+        <!-- Body — 3 columns -->
         <div style="height:635px; display:flex; position:relative;">
 
+          <!-- Col 1: CTA + Address + Button -->
           <div style="width:34%; padding:40px 24px 40px 70px; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;">
             <div class="accent-line" style="width:80px;"></div>
             <h1 style="font-family:var(--font-heading); font-size:42px; font-weight:700; color:#FFFFFF; line-height:1.05; letter-spacing:0.05em; margin:18px 0 0 0;">REFRESH THE TREE.</h1>
@@ -389,6 +403,7 @@
             </div>
           </div>
 
+          <!-- Col 2: QR -->
           <div style="width:30%; padding:40px 24px; display:flex; flex-direction:column; justify-content:center; align-items:center; box-sizing:border-box; border-left:1px solid var(--line); border-right:1px solid var(--line);">
             <div style="background:rgba(255,255,255,0.04); padding:18px; border:1px solid var(--line); display:flex; flex-direction:column; align-items:center;">
               <img src="btc_qr.png" alt="BTC wallet QR — 3GEyeURhLVbRWtZL6qN8MoBKseedN6vRjb" style="width:220px; height:220px; display:block; background:#FFFFFF;">
@@ -397,6 +412,7 @@
             </div>
           </div>
 
+          <!-- Col 3: Wallet screenshot + verification -->
           <div style="width:36%; padding:32px 70px 32px 24px; display:flex; flex-direction:column; justify-content:center; box-sizing:border-box;">
             <div style="border:1px solid var(--line); padding:6px; background:rgba(255,255,255,0.02); width:100%; box-sizing:border-box;">
               <img src="wallet_screenshot.jpg" alt="Wallet screenshot — Crypto.com Explorer, 2026-06-21" style="width:100%; max-height:380px; object-fit:contain; display:block;">
@@ -410,11 +426,13 @@
             <p style="font-family:var(--font-body); font-size:13px; line-height:1.55; color:rgba(255,255,255,0.60); margin:10px 0 0 0;">Cross-check on mempool.space, blockchain.com, or your own node. No middleman, no custodian, no off-ledger.</p>
           </div>
 
+          <!-- Bottom-right deck mark -->
           <div style="position:absolute; bottom:18px; right:70px; font-family:var(--font-num); font-size:12px; letter-spacing:0.12em; color:rgba(255,255,255,0.35);">THE TREE OF LIBERTY · 03 / 03</div>
         </div>
       </div>
     </div>
 
+    <!-- Footer -->
     <div class="deck-footer">
       THE TREE OF LIBERTY &nbsp;·&nbsp; A MANIFESTO IN ONE TRANSACTION &nbsp;·&nbsp; BTC: 3GEyeURhLVbRWtZL6qN8MoBKseedN6vRjb
     </div>
